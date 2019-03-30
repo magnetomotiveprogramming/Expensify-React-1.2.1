@@ -5,6 +5,7 @@ Enzyme.configure({
   adapter: new Adapter()
 })
 
+//check section 12 lecture 119
 
 
 //This file is  a set up test file in our project and this is going to be something that allows us to configure our test environment.
