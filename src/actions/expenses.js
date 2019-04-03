@@ -39,3 +39,113 @@ export const editExpense = (id, updates) => ({
   id,
   updates
 })
+
+//SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type:'SET_EXPENSES',
+  expenses
+})
+
+
+export const startSetExpenses = () => {
+  return (dispatch)=>{
+    return database.ref('expenses').once('value').then((snapshot)=>{
+      const expenses = [];
+      snapshot.forEach((childSnapshot)=>{
+        expenses.push({
+          id:childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });      
+      dispatch(setExpenses(expenses))
+    });    
+  }
+};
+
+
+
+// export const startSetExpenses = () => {
+//   return (dispatch)=>{
+  
+//     return database.ref('expenses')
+//     .once('value', (snapshot)=>{
+//       const expenses = [];
+//       snapshot.forEach((childSnapshot)=>{
+//         expenses.push({
+//           id:childSnapshot.key,
+//           ...childSnapshot.val()
+//         });
+//       });      
+//       console.log(snapshot.val());
+//       console.log(expenses);
+//       dispatch(setExpenses(expenses))
+//     }, (e)=>{
+//       console.log(e);    
+//     })
+//   }
+  
+// }
+
+
+// export const startsetExpenses = (expenseData = {}) => {
+//   return (dispatch) => {
+//     const { 
+//       description = '', 
+//       note = '', 
+//       amount = 0, 
+//       createdAt = 0 
+//     } = expenseData;
+//     const expense = { description, note, amount, createdAt };
+
+//     return database.ref('expenses').push(expense).then((ref)=>{
+//       dispatch(addExpense({
+//         id: ref.key,
+//         ...expense
+//       }));
+//     });
+//   };
+// };
+
+
+// database.ref('expenses')
+//   .on('value', (snapshot)=>{
+//     const expenses = [];
+//     snapshot.forEach((childSnapshot)=>{
+//       expenses.push({
+//         id:childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+//     console.log(expenses);
+//   }, (e)=>{
+//     console.log("val");    
+//   }
+// )
+
+
+
+
+
+// export const addExpense = (expense) => ({
+//   type:'ADD_EXPENSE',
+//   expense
+// })
+
+// export const startAddExpense = (expenseData = {}) => {
+//   return (dispatch) => {
+//     const { 
+//       description = '', 
+//       note = '', 
+//       amount = 0, 
+//       createdAt = 0 
+//     } = expenseData;
+//     const expense = { description, note, amount, createdAt };
+
+//     return database.ref('expenses').push(expense).then((ref)=>{
+//       dispatch(addExpense({
+//         id: ref.key,
+//         ...expense
+//       }));
+//     });
+//   };
+// };

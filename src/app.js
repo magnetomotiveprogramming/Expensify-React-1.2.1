@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-// import {addExpense, removeExpense, editExpense} from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
 // import {setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate} from './actions/filters';
 // import getVisibleExpenses from './selectors/expenses';
 
@@ -16,6 +16,17 @@ import './firebase/firebase';
 
 const store = configureStore();
 
+const jsx = (
+  <Provider store = {store}>
+    <AppRouter />
+  </Provider>
+)
+
+ReactDOM.render(<p>...Loading</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(()=>{
+  ReactDOM.render(jsx, document.getElementById('app'));
+})
 
 // store.dispatch(addExpense({ 
 //   description: 'Water bill', 
@@ -41,15 +52,7 @@ const store = configureStore();
 
 //The prop store equals the store variable on line 14
 //"Provider" component is used in conjunction with Connect as part of the react-redux API. Look up ExpenseList.js to see how "provider" and "connect" work with eact other
-const jsx = (
-  <Provider store = {store}>
-    <AppRouter />
-  </Provider>
-)
 
-
-
-ReactDOM.render(jsx, document.getElementById('app'));
 
 
 // store.subscribe(() => {
