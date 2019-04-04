@@ -1,11 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../../components/Header';
+import { Header } from '../../components/Header';
 
-test('should render Header correctly',()=>{
-  const wrapper = shallow(<Header />)
+test('should render Header correctly', () => {
+  const wrapper = shallow(<Header startLogout={() => { }} />);
   expect(wrapper).toMatchSnapshot();
 });
+
+test('should call startLogout on button click', () => {
+  const startLogout = jest.fn();
+  const wrapper = shallow(<Header startLogout={startLogout} />);
+  wrapper.find('button').simulate('click');
+  expect(startLogout).toHaveBeenCalled();
+});
+
 
 //this test originally uses react-test-renderer. It allows us to virtually render our components inside of just regular javascript code and then we can assert something about what got rendered. react-test-renderer is a react library created by the react team.
 
