@@ -89,7 +89,7 @@ export default class ExpenseForm extends React.Component {
         />
 
         <textarea 
-          className="text-area"             
+          className="textarea"             
           placeholder="add a note for your expense (optional)"
           value={this.state.note}
           onChange={this.onNoteChange}

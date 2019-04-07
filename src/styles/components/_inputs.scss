@@ -2,7 +2,7 @@
   border: 1px solid #cacccd;
   height: 50px;
   font-size: $font-size-large;
-  font-weight:300;
+  font-weight: 300;
   padding: $s-size;
 }
 
@@ -10,7 +10,7 @@
   @extend .text-input;
 }
 
-.text-area {
+.textarea {
   @extend .text-input;
-  height: 10rem;
+  height: 15rem;
 }
